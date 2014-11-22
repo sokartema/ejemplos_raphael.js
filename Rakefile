@@ -12,9 +12,9 @@ task :rack do
 end
 
 desc "Push to github"
-task :gp , :branch
+task :gp , :branch do
   name = args[:branch];
-  sh "git push -u origin #{name}" 
+  sh "git push -u origin #{name}"
 
 end
 
