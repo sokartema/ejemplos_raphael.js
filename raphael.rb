@@ -18,3 +18,36 @@ get '/' do
   haml :index
 
 end
+
+get '/ejemplos/:ejemplo' do
+
+  ejemplo = params[:ejemplo]
+
+  @color = array[rand(array.size)]
+
+  case ejemplo
+
+  when "ejemplo1"
+
+    @title = "Ejemplo1"
+
+    haml :ejemplo1
+  else
+
+    @title = "Error"
+
+    haml :error
+
+  end
+end
+
+get '/help' do
+
+  @title = "Help"
+
+  @color = array[rand(array.size)]
+
+
+  haml :help
+
+end
