@@ -1,0 +1,45 @@
+!!!
+%html
+    %head
+        %title Raphael Ejemplos - #{@title}
+        %meta{:charset => "utf-8"}
+        %meta{:name => "viewport" , :content => "width=device-width"}
+        %script{:type => "text/javascript", :src => "/js/libs/jquery-1.10.2.min.js"}
+        %script{:type => "text/javascript", :src => "/js/raphael.js"}
+        %link{:type => "text/css", :rel => "stylesheet", :href => "/css/groundwork.css"}
+        %script{:type => "text/javascript" , :src => "/js/demo/jquery.snippet.min.js"}
+        %link{:type => "text/css" , :rel => "stylesheet", :src => "/css/demo/jquery.snippet.min.js"}
+    %body
+        %header.padded
+            .container
+                .row
+                    .one.half
+                        %h1.fadeInDown.animated.museo-slab{:class => "#{@color}"} <b> Ejemplos Raphaël
+                    .one.half
+                        <p class="small double-pad-top no-pad-small-tablet align-right align-left-small-tablet"><a href="https://github.com/alu0100595727/ejemplos_raphael.js" target="_parent">Github Project</a> SYTW-ULL<br>Created & Maintained by: <a href="https://github.com/alu0100595727" target="_blank">Jazer Abreu</a>
+                %nav.nav.nav.black.gap-top{:role => "navigation"}
+                    %ul{:role=>"menubar"}
+                        %li
+                            %a.icon-home{:href=>"/"} Inicio
+                        %li{:role => "menu"}
+                            %button Ejemplos Raphaël
+                            %ul
+                                <li><a href="/">Ejemplo1</a></li>
+                                <li><a href="/">Ejemplo2</a></li>
+        .container
+            =yield
+        .container
+            .container.row.black.box.fixed.bottom.desktop-only
+                .one.half
+                    .row.padded
+                        %h3 Sistemas y Tecnologias Web - Universidad de La Laguna
+                    .row.padded
+                        %h3 Curso 2014-2015
+
+                .one.half
+                    .row.padded
+                        .one.third
+                        .one.third
+                        .one.third
+                            %a.blue.button.round.icon-h-sign{:href => "/help"} Help
+    %script{:type => "text/javascript" , :src => "/js/groundwork.all.js"}
