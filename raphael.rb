@@ -32,6 +32,11 @@ get '/ejemplos/:ejemplo' do
     @title = "Ejemplo1"
 
     haml :ejemplo1
+  when "ejemplo2"
+
+    @title = "Ejemplo2"
+
+    haml :ejemplo2
   else
 
     @title = "Error"
