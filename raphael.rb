@@ -52,7 +52,14 @@ get '/ejemplos/:ejemplo' do
 
     @title = "Ejemplo5"
 
-    haml :ejemplo5  
+    haml :ejemplo5
+
+  when "ejemplo6"
+
+    @title = "Ejemplo6"
+
+    haml :ejemplo6
+
   else
 
     @title = "Error"
