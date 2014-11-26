@@ -3,36 +3,134 @@ window.onload = function(){
   var contenedor = document.getElementById('canvas_container');
   var paper = new Raphael(contenedor,600,300);
 
-  var color = ['red','green','#64a0c1','blue','black','#069'];
+  var x = 0;
+  var y = 0;
 
-  var text = paper.text(0,0,'Gracias por su atención!!');
+  var path = paper.path('M 250 290 l -10 0 l 0 -30 l -10 0 l 0 -50 l 30 20 l -30 -20 l -30 20 l 30 -20 l 0 -20 l 0 70 l -10 0 l 0 30 l -10 0 ');
+  var text = paper.text(300,50,'Pulsar: Espacio para saltar, flechas para moverse.');
 
-  text.attr({'font-size':40,'font-family':'Brush Script MT',opacity: 0});
+  text.attr({'font-size':13 , 'font-weight':'bold'});
 
-  text.animate({transform:'T300,100r360',opacity:1} ,2000,'bounce');
-
-  function infinite(){
-
-    var eleccion = Math.floor((Math.random()*3) + 1);
-
-    if(eleccion == 1){
-
-    text.animate({transform:'T300,100r0'},2000,'bounce');
+  path.attr({stroke: 'black' , 'stroke-width': 5 , 'stroke-linejoin': 'bevel'});
 
 
-    text.animate({fill:color[Math.floor((Math.random()*6) + 1) -1]},2000,'bounce');
+
+  document.onkeydown = function(event){
+
+    var holder;
+
+    if(window.event){
+
+      holder = window.event.keyCode;
+
+    }else{
+
+      holder = event.which;
+
+    }
+
+    if(holder == 32){
+
+      jumpup();
+
+    }
+
+    if(holder == 39){
+
+      right();
+
+    }
+
+    if(holder == 37){
+
+      left();
+    }
 
 
-  }else{
 
-    text.animate({transform:'T300,100r360'},2000,'bounce');
+
+  }
+
+  document.onkeyup = function(event){
+
+    var holder;
+
+    if(window.event){
+
+      holder = window.event.keyCode;
+
+    }else{
+
+      holder = event.which;
+
+    }
+
+    if(holder == 32){
+
+      jumpdown();
+
+    }
+
+
+
+  }
+
+  function jumpup(){
+
+    if(y == 0){
+
+      y = y - 20;
+
+      var pos = 'T'+ x + ',' + y;
+
+
+      path.animate({transform:pos},300);
+
+    }
+
+
+  }
+
+  function jumpdown(){
+
+    y = y + 20;
+
+    var pos = 'T'+ x + ',' + y;
+
+
+
+    path.animate({transform:pos},300,'bounce');
+
+
+
+  }
+
+  function right(){
+
+    x = x + 20;
+
+    var pos = 'T'+ x + ',' + y;
+
+
+
+    path.animate({transform:pos},200);
+
+
+  }
+
+  function left(){
+
+    x = x - 20;
+
+    var pos = 'T'+ x + ',' + y;
+
+
+    path.animate({transform:pos},200);
+
 
   }
 
 
-  }
-
-  setInterval(infinite,4000)
 
 
 }
