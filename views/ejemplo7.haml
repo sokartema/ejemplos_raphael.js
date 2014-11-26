@@ -8,37 +8,234 @@
 
                           var contenedor = document.getElementById('canvas_container');
                           var paper = new Raphael(contenedor,600,300);
+                          var red = paper.circle(30,30,10);
+                          var blue = paper.circle(60,30,10);
+                          var green = paper.circle(90,30,10);
+                          var black = paper.circle(120,30,10);
+                          var borrar = paper.ellipse(550,30,20,10);
+                          var repeat = paper.ellipse(500,30,20,10);
+                          var mousedown = false;
+                          var color = 'black'
+                          var width = 2
+                          var path,pathString;
+                          var arraypath = [];
+                          var arraypathstring = [];
 
+                          red.attr({fill:'red','stroke-width':2});
+                          blue.attr({fill:'blue','stroke-width':2});
+                          green.attr({fill:'green','stroke-width':2});
+                          black.attr({fill:'black','stroke-width':2});
 
-                          function multiply(){
+                          borrar.attr({fill:'white','stroke-width':2});
+                          repeat.attr({fill:'purple','stroke-width':2});
 
-                            var circle = paper.circle(-50,-50,30).attr({gradient: '90-#069-#000',stroke:'black','stroke-width':2,opacity:0.5});
+                          red.node.onmouseover = function(){
 
+                            red.animate({transform:'s1.2'},1000,'elastic');
 
-
-                            function draw() {
-
-                              x = Math.floor((Math.random()*520) + 100);
-                              y = Math.floor((Math.random()*220) + 100);
-                              ang = Math.floor((Math.random()*360) + 1);
-
-                              coord = "T" + x + "," + y + "r" + ang;
-
-                              circle.animate({transform:coord},2e3,'linear');
-                            }
-
-
-                            setInterval(draw, 2000);
 
                           }
 
-                          setInterval(multiply,5000)
+                          red.node.onmouseout = function(){
+
+                            red.animate({transform:'s1'},1000,'elastic');
+
+
+                          }
+
+                          red.node.onclick = function(){
+
+                            color = 'red';
+
+
+                          }
+
+                          blue.node.onmouseover = function(){
+
+                            blue.animate({transform:'s1.2'},1000,'elastic');
+
+
+                          }
+
+                          blue.node.onmouseout = function(){
+
+                            blue.animate({transform:'s1'},1000,'elastic');
+
+
+                          }
+
+                          blue.node.onclick = function(){
+
+                            color = 'blue';
+
+
+                          }
+                          green.node.onmouseover = function(){
+
+                            green.animate({transform:'s1.2'},1000,'elastic');
+
+
+                          }
+
+                          green.node.onmouseout = function(){
+
+                            green.animate({transform:'s1'},1000,'elastic');
+
+
+                          }
+
+                          green.node.onclick = function(){
+
+                            color = 'green';
+
+
+                          }
+
+                          black.node.onmouseover = function(){
+
+                            black.animate({transform:'s1.2'},1000,'elastic');
+
+
+                          }
+
+                          black.node.onmouseout = function(){
+
+                            black.animate({transform:'s1'},1000,'elastic');
+
+
+                          }
+
+                          black.node.onclick = function(){
+
+                            color = 'black';
+
+
+                          }
+
+                          borrar.node.onmouseover = function(){
+
+                            borrar.animate({transform:'s1.2'},1000,'elastic');
+
+
+                          }
+
+                          borrar.node.onmouseout = function(){
+
+                            borrar.animate({transform:'s1'},1000,'elastic');
+
+
+                          }
+
+                          borrar.node.onclick = function(){
+
+                            for(i = 0; i < arraypath.length; i++ ){
+
+                                arraypath[i].remove();
+                            }
+
+                            arraypathstring.length = 0;
+
+                          }
+
+                          repeat.node.onmouseover = function(){
+
+                            repeat.animate({transform:'s1.2'},1000,'elastic');
+
+
+                          }
+
+                          repeat.node.onmouseout = function(){
+
+                            repeat.animate({transform:'s1'},1000,'elastic');
+
+
+                          }
+
+                          repeat.node.onclick = function(){
+
+                            for(i = 0; i < arraypath.length; i++ ){
+
+                              arraypath[i].remove();
+                            }
+
+
+                            for(i = 0; i < arraypathstring.length; i++ ){
+
+                              path = paper.path();
+                              path.attr({
+                                'stroke': color,
+                                'stroke-linecap': 'round',
+                                'stroke-linejoin': 'round',
+                                'stroke-width': width
+                              }).toBack();
+
+                              path.animate({path: arraypathstring[i]}, 2000);
+
+                              arraypath[arraypath.length] = path;
+
+                            }
+
+                            arraypathstring.length = 0;
+
+                          }
+
+
+
+
+
+                          $(contenedor).mousedown(function(e){
+
+                            mousedown = true;
+
+                            var x = e.offsetX, y = e.offsetY;
+
+                            pathString = 'M' + x + ' ' + y;
+                            path = paper.path(pathString);
+                            path.attr({
+                              'stroke': color,
+                              'stroke-linecap': 'round',
+                              'stroke-linejoin': 'round',
+                              'stroke-width': width
+                            }).toBack();
+
+                            arraypath[arraypath.length] = path;
+
+
+
+                          });
+
+
+                          $(contenedor).mouseup(function(e){
+
+
+                            mousedown = false;
+
+                          });
+
+                          $(contenedor).mousemove(function(e){
+
+                            if(!mousedown){
+
+                              return;
+                            }
+
+                            var x = e.offsetX, y = e.offsetY;
+
+                            pathString += 'L' + x + ' ' + y;
+                            path.attr('path',pathString);
+
+                            arraypathstring[arraypathstring.length] = pathString;
+
+
+
+                          });
 
 
                         }
 
 
+
     .one.half
-        #canvas_container
+        #canvas_container{:style => "border: 1px black solid;"}
 
 %script{:type => "text/javascript" , :src => "/js/raphael/ejemplo7.js"}
