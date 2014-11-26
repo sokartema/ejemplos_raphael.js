@@ -60,6 +60,12 @@ get '/ejemplos/:ejemplo' do
 
     haml :ejemplo6
 
+  when "ejemplo7"
+
+    @title = "Ejemplo7"
+
+    haml :ejemplo7
+
   else
 
     @title = "Error"

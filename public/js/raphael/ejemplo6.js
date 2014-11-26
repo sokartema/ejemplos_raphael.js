@@ -128,6 +128,9 @@ window.onload = function(){
     }
 
 
+      arraypathstring.length = 0;
+
+
   }
 
   repeat.node.onmouseover = function(){
